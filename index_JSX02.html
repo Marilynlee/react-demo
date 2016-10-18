@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>index_JSX002</title>
+    <script src="react-15.3.2/build/react.js"></script>
+    <script src="react-15.3.2/build/react-dom.js"></script>
+    <script src="react-15.3.2/build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="container"></div>
+
+</body>
+
+<script type="text/jsx">
+    var Hello = React.createClass({
+
+        //getInitialState最终执行结果需要返回一个Object,且返回值定义了当前components的State
+        getInitialState:function(){
+            alert("InitialState");
+            return{
+                opacity:1.0,
+                fontSize:"12px",
+                color:"green"
+            }
+        },
+
+        render: function() {
+            return <div style={this.state}>Hello {this.props.title} {this.props.name}</div>;
+            //return <div style={{opacity:this.state.opacity,fontSize:this.state.fontSize}} className="col">Hello {this.props.title} {this.props.name}</div>;
+        },
+
+        componentWillMount:function(){
+            alert("Will Mount!");
+        },
+
+        componentDidMount:function(){
+            alert("Did Mount!");
+            //var _this=this;
+            window.setTimeout(function(){
+                this.setState({
+                    opacity:0.3,
+                    fontSize:"30px",
+                    color:"red"
+                })
+            }.bind(this),1000)
+        }
+
+    });
+
+    ReactDOM.render(
+            <Hello title="Miss" name="World！！" />,
+            document.getElementById('container'),
+            function(){
+                console.log("Done");
+            }
+    );
+</script>
+</html>

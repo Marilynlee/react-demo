@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>index_JSX001</title>
+    <script src="react-15.3.2/build/react.js"></script>
+    <script src="react-15.3.2/build/react-dom.js"></script>
+    <script src="react-15.3.2/build/JSXTransformer.js"></script>
+    <style>
+        .col{
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+
+</body>
+
+<script type="text/jsx">
+    var Hello = React.createClass({
+        render: function() {
+            var styleObj={
+                background:"cyan",
+                fontSize:"24px",
+                textAlign:"center"
+            };
+            return <div style={styleObj} className="col">Hello {this.props.title} {this.props.name}</div>;
+        }
+    });
+
+    ReactDOM.render(
+            <Hello title="Mr" name="World！！" />,
+            document.getElementById('container'),
+            function(){
+                console.log("Done");
+            }
+    );
+</script>
+</html>

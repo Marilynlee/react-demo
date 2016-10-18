@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>index_JSX003</title>
+    <script src="react-15.3.2/build/react.js"></script>
+    <script src="react-15.3.2/build/react-dom.js"></script>
+    <script src="react-15.3.2/build/JSXTransformer.js"></script>
+    <style>
+        .btn-box{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+
+<script type="text/jsx">
+    var TextClickComponent=React.createClass({
+        handleClick:function(e){
+            var tipE=ReactDOM.findDOMNode(this.refs.tip);
+            if(tipE.style.display==="none"){
+                tipE.style.display="inline";
+            }else{
+                tipE.style.display="none";
+            }
+
+            e.stopPropagation();
+            e.preventDefault();
+        },
+
+        render:function(){
+            return(
+                    <div className="btn-box">
+                        <button onClick={this.handleClick}>显示/隐藏</button>
+                        <span ref="tip">测试点击</span>
+                    </div>
+            )
+        }
+    });
+
+    var TextInputComponent=React.createClass({
+        getInitialState:function(){
+            return{
+                inputContent:""
+            }
+        },
+
+        changeHandler:function(e){
+            this.setState({
+                inputContent: e.target.value
+            });
+            e.stopPropagation();
+            e.preventDefault();
+        },
+
+        render:function(){
+            return(
+                    <div>
+                        <input type="text" onChange={this.changeHandler}/>
+                        <span>{this.state.inputContent}</span>
+                    </div>
+            )
+        }
+    });
+
+    ReactDOM.render(
+            <div>
+                <TextClickComponent/>
+                <TextInputComponent/>
+            </div>,
+            document.getElementById("container")
+
+    )
+
+</script>
+</body>
+</html>
